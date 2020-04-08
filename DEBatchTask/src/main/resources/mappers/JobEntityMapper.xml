@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.newhope.batch.mapper.JobEntityMapper" >
+  <resultMap id="BaseResultMap" type="cn.newhope.batch.entity.JobEntity" >
+    <id column="entity_id" property="entityId" jdbcType="VARCHAR" />
+    <result column="entity_name" property="entityName" jdbcType="VARCHAR" />
+    <result column="entity_group" property="entityGroup" jdbcType="VARCHAR" />
+    <result column="cron" property="cron" jdbcType="VARCHAR" />
+    <result column="parameter" property="parameter" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="job_class" property="jobClass" jdbcType="VARCHAR" />
+    <result column="jar_path" property="jarPath" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    entity_id, entity_name, entity_group, cron, parameter, description, job_class, jar_path, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_job_entity
+    where entity_id = #{entityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_job_entity
+    where entity_id = #{entityId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.newhope.batch.entity.JobEntity" >
+    insert into t_job_entity (entity_id, entity_name, entity_group, 
+      cron, parameter, description, 
+      job_class, jar_path, status
+      )
+    values (#{entityId,jdbcType=VARCHAR}, #{entityName,jdbcType=VARCHAR}, #{entityGroup,jdbcType=VARCHAR}, 
+      #{cron,jdbcType=VARCHAR}, #{parameter,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{jobClass,jdbcType=VARCHAR}, #{jarPath,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.newhope.batch.entity.JobEntity" >
+    insert into t_job_entity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="entityId != null" >
+        entity_id,
+      </if>
+      <if test="entityName != null" >
+        entity_name,
+      </if>
+      <if test="entityGroup != null" >
+        entity_group,
+      </if>
+      <if test="cron != null" >
+        cron,
+      </if>
+      <if test="parameter != null" >
+        parameter,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="jobClass != null" >
+        job_class,
+      </if>
+      <if test="jarPath != null" >
+        jar_path,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="entityId != null" >
+        #{entityId,jdbcType=VARCHAR},
+      </if>
+      <if test="entityName != null" >
+        #{entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="entityGroup != null" >
+        #{entityGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="cron != null" >
+        #{cron,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null" >
+        #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="jobClass != null" >
+        #{jobClass,jdbcType=VARCHAR},
+      </if>
+      <if test="jarPath != null" >
+        #{jarPath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.newhope.batch.entity.JobEntity" >
+    update t_job_entity
+    <set >
+      <if test="entityName != null" >
+        entity_name = #{entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="entityGroup != null" >
+        entity_group = #{entityGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="cron != null" >
+        cron = #{cron,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null" >
+        parameter = #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="jobClass != null" >
+        job_class = #{jobClass,jdbcType=VARCHAR},
+      </if>
+      <if test="jarPath != null" >
+        jar_path = #{jarPath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where entity_id = #{entityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.newhope.batch.entity.JobEntity" >
+    update t_job_entity
+    set entity_name = #{entityName,jdbcType=VARCHAR},
+      entity_group = #{entityGroup,jdbcType=VARCHAR},
+      cron = #{cron,jdbcType=VARCHAR},
+      parameter = #{parameter,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      job_class = #{jobClass,jdbcType=VARCHAR},
+      jar_path = #{jarPath,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where entity_id = #{entityId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByJobName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_job_entity
+    where entity_name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_job_entity
+  </select>
+
+  <select id="findByGroup" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_job_entity
+    where entity_group = #{group,jdbcType=VARCHAR}
+    
+  </select>
+  
+  <delete id="deleteByJobName" parameterType="java.lang.String" >
+    delete from t_job_entity
+    where entity_name = #{name,jdbcType=VARCHAR}
+  </delete>
+
+  <update id="updateJobByName" parameterType="cn.newhope.batch.entity.JobEntity" >
+    update t_job_entity
+    <set >
+      <if test="entityGroup != null" >
+        entity_group = #{entityGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="cron != null" >
+        cron = #{cron,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null" >
+        parameter = #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="jobClass != null" >
+        job_class = #{jobClass,jdbcType=VARCHAR},
+      </if>
+      <if test="jarPath != null" >
+        jar_path = #{jarPath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where entity_name = #{entityName,jdbcType=VARCHAR}
+  </update>
+</mapper>

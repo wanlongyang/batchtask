@@ -1,0 +1,61 @@
+
+
+#公共配置与profiles选择无关
+mybatis:
+  typeAliasesPackage: cn.newhope.batch.entity
+  mapperLocations: classpath:mappers/*.xml
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/openplatform?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=PRC
+    username: root
+    password: root
+    driverClassName: com.mysql.cj.jdbc.Driver
+    initialSize: 10
+    maxActive: 40
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 10
+    testOnBorrow: true
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 'x'
+    validationQueryTimeout: 3000
+
+    
+  #redis配置
+  redis:
+    hostname: x.x.x.x
+    database: 6
+    maxIdle: 300
+    maxTotal: 1000
+    maxWaitMillis: 1000
+    minEvictableIdleTimeMillis: 300000
+    numTestsPerEvictionRun: 1024
+    password: ''
+    port: 6379
+    testOnBorrow: 'true'
+    testWhileIdle: 'true'
+    timeBetweenEvictionRunsMillis: 30000
+    timeout: 10000
+
+#eureka:
+#  client:
+#    serviceUrl: #注册中心的注册地址
+#      defaultZone: http://x.x.x.x:8010/eureka/,http://x.x.x.x:8010/eureka/
+#ribbon:
+#  ReadTimeout: 6000
+#  ConnectTimeout: 3000
+#  OkToRetryOnAllOperations: true #对所有请求操作都进行重试
+#  MaxAutoRetries: 3 #对当前服务的重试次数（第一次分配给实例1的时候，如果404，则再重试MaxAutoRetries次，如果还是404则切换到其他服务MaxAutoRetriesNextServer决定）
+#  MaxAutoRetriesNextServer: 1 #切换服务的次数(比如本次请求分配给实例1处理，发现404，则切换分配给实例2处理，如果还是404，则返回404给客户端）
+
+
+logging:
+  config: classpath:logback-local.xml
+
+#三方api配置路径
+api.file:
+  env.properties

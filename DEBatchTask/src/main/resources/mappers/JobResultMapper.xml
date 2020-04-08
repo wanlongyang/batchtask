@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.newhope.batch.mapper.JobResultMapper" >
+  <resultMap id="BaseResultMap" type="cn.newhope.batch.entity.JobResult" >
+    <id column="result_id" property="resultId" jdbcType="VARCHAR" />
+    <result column="job_key" property="jobKey" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.newhope.batch.entity.JobResult" extends="BaseResultMap" >
+    <result column="exception_info" property="exceptionInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    result_id, job_key, start_time, end_time, status, description
+  </sql>
+  <sql id="Blob_Column_List" >
+    exception_info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_job_result
+    where result_id = #{resultId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_job_result
+    where result_id = #{resultId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.newhope.batch.entity.JobResult" >
+    insert into t_job_result (result_id, job_key, start_time, 
+      end_time, status, description, 
+      exception_info)
+    values (#{resultId,jdbcType=VARCHAR}, #{jobKey,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{exceptionInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.newhope.batch.entity.JobResult" >
+    insert into t_job_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resultId != null" >
+        result_id,
+      </if>
+      <if test="jobKey != null" >
+        job_key,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="exceptionInfo != null" >
+        exception_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resultId != null" >
+        #{resultId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobKey != null" >
+        #{jobKey,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionInfo != null" >
+        #{exceptionInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.newhope.batch.entity.JobResult" >
+    update t_job_result
+    <set >
+      <if test="jobKey != null" >
+        job_key = #{jobKey,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionInfo != null" >
+        exception_info = #{exceptionInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where result_id = #{resultId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.newhope.batch.entity.JobResult" >
+    update t_job_result
+    set job_key = #{jobKey,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      exception_info = #{exceptionInfo,jdbcType=LONGVARCHAR}
+    where result_id = #{resultId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.newhope.batch.entity.JobResult" >
+    update t_job_result
+    set job_key = #{jobKey,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where result_id = #{resultId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateJobResultById" parameterType="cn.newhope.batch.entity.JobResult" >
+    update t_job_result
+    set
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      exception_info = #{exceptionInfo,jdbcType=LONGVARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+     where result_id = #{resultId,jdbcType=VARCHAR}
+  </update>
+</mapper>
