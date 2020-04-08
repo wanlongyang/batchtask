@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.newhope.batch.mapper.JobResultMapper" >
-  <resultMap id="BaseResultMap" type="cn.newhope.batch.entity.JobResult" >
+<mapper namespace="cn.wanlong.batch.mapper.JobResultMapper" >
+  <resultMap id="BaseResultMap" type="cn.wanlong.batch.entity.JobResult" >
     <id column="result_id" property="resultId" jdbcType="VARCHAR" />
     <result column="job_key" property="jobKey" jdbcType="VARCHAR" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
@@ -9,7 +9,7 @@
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="cn.newhope.batch.entity.JobResult" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="cn.wanlong.batch.entity.JobResult" extends="BaseResultMap" >
     <result column="exception_info" property="exceptionInfo" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -30,7 +30,7 @@
     delete from t_job_result
     where result_id = #{resultId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="cn.newhope.batch.entity.JobResult" >
+  <insert id="insert" parameterType="cn.wanlong.batch.entity.JobResult" >
     insert into t_job_result (result_id, job_key, start_time, 
       end_time, status, description, 
       exception_info)
@@ -38,7 +38,7 @@
       #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{exceptionInfo,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.newhope.batch.entity.JobResult" >
+  <insert id="insertSelective" parameterType="cn.wanlong.batch.entity.JobResult" >
     insert into t_job_result
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="resultId != null" >
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.newhope.batch.entity.JobResult" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wanlong.batch.entity.JobResult" >
     update t_job_result
     <set >
       <if test="jobKey != null" >
@@ -111,7 +111,7 @@
     </set>
     where result_id = #{resultId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.newhope.batch.entity.JobResult" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.wanlong.batch.entity.JobResult" >
     update t_job_result
     set job_key = #{jobKey,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
@@ -121,7 +121,7 @@
       exception_info = #{exceptionInfo,jdbcType=LONGVARCHAR}
     where result_id = #{resultId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.newhope.batch.entity.JobResult" >
+  <update id="updateByPrimaryKey" parameterType="cn.wanlong.batch.entity.JobResult" >
     update t_job_result
     set job_key = #{jobKey,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
@@ -130,7 +130,7 @@
       description = #{description,jdbcType=VARCHAR}
     where result_id = #{resultId,jdbcType=VARCHAR}
   </update>
-  <update id="updateJobResultById" parameterType="cn.newhope.batch.entity.JobResult" >
+  <update id="updateJobResultById" parameterType="cn.wanlong.batch.entity.JobResult" >
     update t_job_result
     set
       start_time = #{startTime,jdbcType=TIMESTAMP},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.newhope.batch.mapper.JobEntityMapper" >
-  <resultMap id="BaseResultMap" type="cn.newhope.batch.entity.JobEntity" >
+<mapper namespace="cn.wanlong.batch.mapper.JobEntityMapper" >
+  <resultMap id="BaseResultMap" type="cn.wanlong.batch.entity.JobEntity" >
     <id column="entity_id" property="entityId" jdbcType="VARCHAR" />
     <result column="entity_name" property="entityName" jdbcType="VARCHAR" />
     <result column="entity_group" property="entityGroup" jdbcType="VARCHAR" />
@@ -26,7 +26,7 @@
     delete from t_job_entity
     where entity_id = #{entityId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="cn.newhope.batch.entity.JobEntity" >
+  <insert id="insert" parameterType="cn.wanlong.batch.entity.JobEntity" >
     insert into t_job_entity (entity_id, entity_name, entity_group, 
       cron, parameter, description, 
       job_class, jar_path, status
@@ -36,7 +36,7 @@
       #{jobClass,jdbcType=VARCHAR}, #{jarPath,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.newhope.batch.entity.JobEntity" >
+  <insert id="insertSelective" parameterType="cn.wanlong.batch.entity.JobEntity" >
     insert into t_job_entity
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="entityId != null" >
@@ -97,7 +97,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.newhope.batch.entity.JobEntity" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wanlong.batch.entity.JobEntity" >
     update t_job_entity
     <set >
       <if test="entityName != null" >
@@ -127,7 +127,7 @@
     </set>
     where entity_id = #{entityId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.newhope.batch.entity.JobEntity" >
+  <update id="updateByPrimaryKey" parameterType="cn.wanlong.batch.entity.JobEntity" >
     update t_job_entity
     set entity_name = #{entityName,jdbcType=VARCHAR},
       entity_group = #{entityGroup,jdbcType=VARCHAR},
@@ -166,7 +166,7 @@
     where entity_name = #{name,jdbcType=VARCHAR}
   </delete>
 
-  <update id="updateJobByName" parameterType="cn.newhope.batch.entity.JobEntity" >
+  <update id="updateJobByName" parameterType="cn.wanlong.batch.entity.JobEntity" >
     update t_job_entity
     <set >
       <if test="entityGroup != null" >
